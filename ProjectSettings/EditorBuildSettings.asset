@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/House.unity
+    guid: 81d6c2918ab313a4d86c91bd387ba9d8
+  - enabled: 1
+    path: Assets/Scenes/Main.unity
+    guid: 80cf229367c9b314ea496cb4e1fa2cb1
+  m_configObjects: {}
