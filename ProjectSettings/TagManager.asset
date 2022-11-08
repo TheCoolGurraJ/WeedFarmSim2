@@ -8,6 +8,8 @@ TagManager:
   - SceneChanger
   - GrowBar
   - Pot
+  - Spawnpoint
+  - GrowHandler
   layers:
   - Default
   - TransparentFX

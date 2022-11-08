@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 public class Interactables : MonoBehaviour
 {
     public SceneChanger sc;
-    public GameObject pots;
     public GameObject cam;
     public Camera main_cam;
     public GrowHandler growhandler;
@@ -14,10 +15,11 @@ public class Interactables : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(pots)
+       if(SceneManager.GetActiveScene().name == "House")
         {
-            growhandler = pots.GetComponent<GrowHandler>()!;
+            growhandler = GameObject.FindGameObjectWithTag("GrowHandler").GetComponent<GrowHandler>();
         }
+
         cam = GameObject.FindGameObjectWithTag("MainCamera");
         //if camera is in scene
         if(cam)
@@ -36,8 +38,7 @@ public class Interactables : MonoBehaviour
     void Update()
     {
         if (ishit)
-        {
-            
+        {   
             //Add check to see if player is in range.
             if (Input.GetKeyDown(KeyCode.E))
             {
