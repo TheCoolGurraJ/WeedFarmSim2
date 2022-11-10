@@ -495,10 +495,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sc: {fileID: 11400000, guid: f258366196a6883439d357cfa60674f0, type: 2}
-  pots: {fileID: 0}
   cam: {fileID: 0}
   main_cam: {fileID: 0}
-  growhandler: {fileID: 0}
+  growhandler: {fileID: 11400000, guid: 323dccb5509470b4182028fe1a0188b2, type: 2}
   ishit: 0
 --- !u!1 &1256807910
 GameObject:

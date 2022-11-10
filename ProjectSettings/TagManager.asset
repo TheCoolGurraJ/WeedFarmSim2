@@ -10,6 +10,8 @@ TagManager:
   - Pot
   - Spawnpoint
   - GrowHandler
+  - WeedKeeper
+  - PotsObj
   layers:
   - Default
   - TransparentFX

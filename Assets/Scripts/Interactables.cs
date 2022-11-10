@@ -15,11 +15,6 @@ public class Interactables : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       if(SceneManager.GetActiveScene().name == "House")
-        {
-            growhandler = GameObject.FindGameObjectWithTag("GrowHandler").GetComponent<GrowHandler>();
-        }
-
         cam = GameObject.FindGameObjectWithTag("MainCamera");
         //if camera is in scene
         if(cam)
@@ -56,5 +51,6 @@ public class Interactables : MonoBehaviour
                 }
             }
         }
+        growhandler.UpdateValues();
     }
 }

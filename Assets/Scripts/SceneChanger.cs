@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 [CreateAssetMenu(menuName = "SceneChanger")]
 public class SceneChanger : ScriptableObject
 {
+	public GrowHandler growHandler;
 	public void ChangeScene()
 	{
 		string[] scenes = { "Main", "House" };

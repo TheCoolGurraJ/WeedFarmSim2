@@ -15,71 +15,85 @@ public class Pot
     public GameObject weedplant { get; set; }
     public float timer { get; set; } = 0f;
     public bool isgrowing { get; set; } = false;
+    public int id { get; set;}
+
 }
 
-public class GrowHandler : MonoBehaviour
+[CreateAssetMenu(menuName = "GrowHandler")]
+public class GrowHandler : ScriptableObject
 {
     public List<Pot> pots = new List<Pot>();
     public GameObject player;
     public GameObject[] GrowBars;
     public GameObject weedplant;
+    public GameObject potsObj;
 
     private Scene currScene;
     private static bool isinitialized = false;
 
-    private void Awake()
+    private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
 
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
- 
-
+        player = GameObject.FindGameObjectWithTag("Player");
+        Debug.Log("Scene changed");
         currScene = scene;
+
+        Debug.Log(currScene.name);
 
         if (currScene.name == "House")
         {
-            GrowBars = GameObject.FindGameObjectsWithTag("GrowBar");
-            player = GameObject.FindGameObjectWithTag("Player");
-        }
-    }
+            potsObj = GameObject.FindGameObjectWithTag("PotsObj");
+            Debug.Log(potsObj);
 
-    void Start()
-    {
-        //MAKE THIS SCRIPTABEL OBJECVT TO AVOID MULTIPLE GROWHADNELR
-
-        if (!isinitialized)
-        {
-            GameObject[] potObjs = GameObject.FindGameObjectsWithTag("Pot");
-
-            for (int i = 0; i < potObjs.Length; i++)
+            foreach (Pot p in pots)
             {
-                //Store all children in a list.
-                //Pots will be able to be purchased so a growable list makes sense.
-
-                //We create a new Pot object and store it in our list.
-                GameObject pot = potObjs[i];
-                Pot _pot = new Pot()
-                {
-                    gameobj = pot,
-                    GrowBar = GrowBars[i],
-                    growstatus = 0
-                };
-                pots.Add(_pot);
+                Debug.Log("id: "+ p.id);
+                p.gameobj = potsObj.transform.GetChild(p.id).gameObject;
+                Debug.Log(p.gameobj);
+                p.GrowBar = p.gameobj.transform.Find("Canvas/GrowBar").gameObject;
+                Debug.Log(p.GrowBar);
+                if (p.hasgrown)
+                    PotFinished(p);
             }
-            isinitialized = true;
+
+            if (!isinitialized)
+            {
+                GameObject[] potObjs = GameObject.FindGameObjectsWithTag("Pot");
+                GrowBars = GameObject.FindGameObjectsWithTag("GrowBar");
+
+                for (int i = 0; i < potObjs.Length; i++)
+                {
+                    //Store all children in a list.
+                    //Pots will be able to be purchased so a growable list makes sense.
+
+                    //We create a new Pot object and store it in our list.
+                    GameObject pot = potObjs[i];
+                    Pot _pot = new Pot()
+                    {
+                        gameobj = pot,
+                        GrowBar = GrowBars[i],
+                        growstatus = 0,
+                        id = i
+                    };
+                    pots.Add(_pot);
+                }
+                isinitialized = true;
+            }
         }
     }
 
-    void Update()
+    public void UpdateValues()
     {
         if (currScene.name == "House")
         {
             foreach (Pot pot in pots)
             {
-                //The postion of the player in a 2D plane.
+                //The position of the player in a 2D plane.
                 Vector3 targetpos = new Vector3(
                 player.transform.position.x,
                 pot.GrowBar.transform.position.y,
@@ -146,7 +160,7 @@ public class GrowHandler : MonoBehaviour
         }
     }
 
-    public void HarvestPlant(Pot pot)
+    private void HarvestPlant(Pot pot)
     {
         //Harvesting plant
         pot.hasgrown = false;
@@ -155,7 +169,7 @@ public class GrowHandler : MonoBehaviour
         player.GetComponent<InventorySystem>().AddTo("Weed", 1);
     }
 
-    public void PotFinished(Pot pot)
+    private void PotFinished(Pot pot)
     {
         //pot is now finished!
         pot.growstatus = 0f;
@@ -168,7 +182,7 @@ public class GrowHandler : MonoBehaviour
         pot.GrowBar.SetActive(false);
     }
 
-    public void PlantPlant(Pot pot)
+    private void PlantPlant(Pot pot)
     {
         pot.growstatus = 0f;
         pot.timer = 0f;
