@@ -24,4 +24,9 @@ public class SceneChanger : ScriptableObject
 	{
 		Application.Quit();
 	}
+
+	public string GetCurrentScene()
+    {
+		return SceneManager.GetActiveScene().name;
+    }
 }

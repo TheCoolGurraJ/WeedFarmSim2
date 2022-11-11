@@ -34,7 +34,6 @@ public class GrowHandler : ScriptableObject
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-
     }
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)

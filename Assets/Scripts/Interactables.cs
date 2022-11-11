@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using Doublsb.Dialog;
+
 
 public class Interactables : MonoBehaviour
 {
@@ -9,17 +10,18 @@ public class Interactables : MonoBehaviour
     public GameObject cam;
     public Camera main_cam;
     public GrowHandler growhandler;
+    public GameObject npchandler;
     public RaycastHit hit;
     public bool ishit;
 
     // Start is called before the first frame update
     void Start()
     {
-        cam = GameObject.FindGameObjectWithTag("MainCamera");
-        //if camera is in scene
-        if(cam)
+        if (sc.GetCurrentScene() == "Main")
         {
-            main_cam = cam.GetComponent<Camera>();
+            DialogManager dialogManager = GameObject.FindGameObjectWithTag("DialogAsset").GetComponent<DialogManager>();
+
+            dialogManager.HideDialogOnEnable();
         }
     }
 
@@ -47,6 +49,10 @@ public class Interactables : MonoBehaviour
                     case "Pot":
                         //Make it grow!
                         growhandler.MakePotGrow(hit.collider);
+                        break;
+
+                    case "NPC":
+                        npchandler.GetComponent<NPCHandler>().MakeNPCAction(hit.collider.gameObject);
                         break;
                 }
             }

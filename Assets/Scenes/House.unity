@@ -3684,8 +3684,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sc: {fileID: 11400000, guid: f258366196a6883439d357cfa60674f0, type: 2}
   cam: {fileID: 2107643419}
-  main_cam: {fileID: 0}
+  main_cam: {fileID: 2107643422}
   growhandler: {fileID: 11400000, guid: 323dccb5509470b4182028fe1a0188b2, type: 2}
+  npchandler: {fileID: 0}
   ishit: 0
 --- !u!114 &290616077
 MonoBehaviour:
@@ -9110,5 +9111,10 @@ Mesh:
 --- !u!1 &2107643419 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4459864851310106424, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
+  m_PrefabInstance: {fileID: 290616074}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &2107643422 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 4459864851310106426, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
   m_PrefabInstance: {fileID: 290616074}
   m_PrefabAsset: {fileID: 0}

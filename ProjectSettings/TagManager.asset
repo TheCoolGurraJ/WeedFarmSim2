@@ -12,6 +12,8 @@ TagManager:
   - GrowHandler
   - WeedKeeper
   - PotsObj
+  - NPC
+  - DialogAsset
   layers:
   - Default
   - TransparentFX
